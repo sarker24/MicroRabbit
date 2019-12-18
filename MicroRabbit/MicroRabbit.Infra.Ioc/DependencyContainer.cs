@@ -1,4 +1,6 @@
-﻿using MicroRabbit.Cataring.Data.Context;
+﻿using MicroRabbit.Cataring.Application.Interfaces;
+using MicroRabbit.Cataring.Application.Services;
+using MicroRabbit.Cataring.Data.Context;
 using MicroRabbit.Cataring.Data.Repository;
 using MicroRabbit.Cataring.Domain.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,7 +20,7 @@ namespace MicroRabbit.Infra.Ioc
 
             // Application services
 
-            // services.AddTransient<IFeedBackService, IFeedBackService>();
+            services.AddTransient<IOrderService, OrderService>();
 
 
             //Data

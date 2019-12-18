@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MediatR;
 using MicroRabbit.Cataring.Data.Context;
 using MicroRabbit.Infra.Ioc;
 using Microsoft.AspNetCore.Builder;
@@ -13,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace MicroRabbit.Catering.Api
 {
@@ -33,7 +35,12 @@ namespace MicroRabbit.Catering.Api
                 Options.UseSqlServer(Configuration.GetConnectionString("CataringDBConnection"));
             });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddSwaggerGen(c =>
+            {
+            c.SwaggerDoc("V1", new Info { Title = "Cataring Microservice", Version = "V1" });
+            });
 
+            services.AddMediatR(typeof(Startup));
             RegisterServices(services);
         }
 
@@ -56,6 +63,18 @@ namespace MicroRabbit.Catering.Api
             }
 
             app.UseHttpsRedirection();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+
+                c.SwaggerEndpoint("/swagger/V1/swagger.json", "Cataring Microservice V1");
+
+                //string swaggerJsonBasePath = string.IsNullOrWhiteSpace(c.RoutePrefix) ? "." : "..";
+                //c.SwaggerEndpoint($"{swaggerJsonBasePath}/swagger/v1/swagger.json", "My API");
+               // c.RoutePrefix = string.Empty;
+
+            });
+                       
             app.UseMvc();
         }
     }

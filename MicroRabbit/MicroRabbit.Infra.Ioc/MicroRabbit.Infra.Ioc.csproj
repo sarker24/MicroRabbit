@@ -10,8 +10,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MicroRabbit.Cataring.Data\MicroRabbit.Cataring.Data.csproj" />
-    <ProjectReference Include="..\MicroRabbit.Cataring.Domain\MicroRabbit.Cataring.Domain.csproj" />
     <ProjectReference Include="..\MicroRabbit.Catering.Application\MicroRabbit.Cataring.Application.csproj" />
+    <ProjectReference Include="..\MicroRabbit.Domain.Core\MicroRabbit.Domain.Core.csproj" />
   </ItemGroup>
 
 </Project>
