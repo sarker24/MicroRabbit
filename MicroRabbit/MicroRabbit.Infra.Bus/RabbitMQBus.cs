@@ -2,9 +2,12 @@
 using MicroRabbit.Domain.Core.Bus;
 using MicroRabbit.Domain.Core.Commands;
 using MicroRabbit.Domain.Core.Events;
+using Newtonsoft.Json;
 using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -31,13 +34,96 @@ namespace MicroRabbit.Infra.Bus
         public void Publish<T>(T @event) where T : Event
         {
             var factory = new ConnectionFactory() { HostName = "localhost" };
+            using (var connection = factory.CreateConnection())
+            using (var channel = connection.CreateModel())
+            {
+                var eventName = @event.GetType().Name;
+                channel.QueueDeclare(eventName, false, false, false, null);
+                var message = JsonConvert.SerializeObject(@event);
+                var body = Encoding.UTF8.GetBytes(message);
+                channel.BasicPublish("", eventName, null, body);
+            }
         }
 
          public void SubsCribe<T, TH>()
             where T : Event
             where TH : IEventHandler<T>
         {
-            throw new NotImplementedException();
+            var eventName = typeof(T).Name;
+            var handerType = typeof(TH);
+
+            if(!_eventType.Contains(typeof(T)))
+            {
+                _eventType.Add(typeof(T));
+            }
+            if(!_handler.ContainsKey(eventName))
+            {
+                _handler.Add(eventName, new List<Type>());
+            }
+
+            if(_handler[eventName].Any(s => s.GetType() == handerType))
+            {
+                throw new ArgumentException(
+                    $"Handler type {handerType.Name} already regitered", nameof(handerType));
+            }
+            _handler[eventName].Add(handerType);
+
+            StartBasicConsume<T>();
+        }
+
+        private void StartBasicConsume<T>() where T : Event
+        {
+            var factory = new ConnectionFactory()
+            {
+                HostName = "localhost",
+                DispatchConsumersAsync = true
+            };
+            var connection = factory.CreateConnection();
+            var channel = connection.CreateModel();
+
+            var eventName = typeof(T).Name;
+
+            channel.QueueDeclare(eventName, false, false, false, null);
+            var consumer = new AsyncEventingBasicConsumer(channel);
+
+            consumer.Received += consumer_Received;
+            channel.BasicConsume(eventName, true, consumer);
+        }
+
+        private async Task consumer_Received(object sender, BasicDeliverEventArgs e)
+        {
+            var eventName = e.RoutingKey;
+            var message = Encoding.UTF8.GetString(e.Body);
+
+            try
+            {
+                await processEvent(eventName, message).ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        private async Task processEvent(string eventName, string message)
+        {
+            var subscriptions = _handler[eventName];
+
+            foreach (var subcription  in subscriptions)
+            {
+                var handler = Activator.CreateInstance(subcription);
+
+                if(handler == null) continue;
+
+                var eventType = _eventType.SingleOrDefault(t => t.Name == eventName);
+                var @event = JsonConvert.DeserializeObject(message, eventType);
+                var concreteType = typeof(IEventHandler<>).MakeGenericType(eventType);
+
+                await (Task)concreteType.GetMethod("Handle").Invoke(handler, new object[] { @event });
+
+
+            }
         }
     }
 }
