@@ -23,23 +23,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{DDD5F982-167B-49A9-BA92-27C3AC980071}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroRabbit.Catering.Api", "MicroRabbit.Catering.Api\MicroRabbit.Catering.Api.csproj", "{31544AFC-354E-4558-940B-4968EE009ECA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroRabbit.Catering.Api", "MicroRabbit.Catering.Api\MicroRabbit.Catering.Api.csproj", "{31544AFC-354E-4558-940B-4968EE009ECA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroRabbit.Cataring.Application", "MicroRabbit.Catering.Application\MicroRabbit.Cataring.Application.csproj", "{28364D6F-C45C-4487-8908-8055B2A2CEEA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroRabbit.Cataring.Application", "MicroRabbit.Catering.Application\MicroRabbit.Cataring.Application.csproj", "{28364D6F-C45C-4487-8908-8055B2A2CEEA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroRabbit.Cataring.Data", "MicroRabbit.Cataring.Data\MicroRabbit.Cataring.Data.csproj", "{40ADD60B-687B-45F7-B0A3-373C5E5A0135}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroRabbit.Cataring.Data", "MicroRabbit.Cataring.Data\MicroRabbit.Cataring.Data.csproj", "{40ADD60B-687B-45F7-B0A3-373C5E5A0135}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroRabbit.Cataring.Domain", "MicroRabbit.Cataring.Domain\MicroRabbit.Cataring.Domain.csproj", "{EEF31EF6-DD97-4DC0-8848-9E3BD450F52D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroRabbit.Cataring.Domain", "MicroRabbit.Cataring.Domain\MicroRabbit.Cataring.Domain.csproj", "{EEF31EF6-DD97-4DC0-8848-9E3BD450F52D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroRabbit.Infra.Ioc", "MicroRabbit.Infra.Ioc\MicroRabbit.Infra.Ioc.csproj", "{A60F1E6A-6736-41F6-9ADF-A49E5E29985F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroRabbit.Infra.Ioc", "MicroRabbit.Infra.Ioc\MicroRabbit.Infra.Ioc.csproj", "{A60F1E6A-6736-41F6-9ADF-A49E5E29985F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroRabbit.Domain.Core", "MicroRabbit.Domain.Core\MicroRabbit.Domain.Core.csproj", "{2EDA1F93-6B7D-40D2-AAE5-F2CC9E32265E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroRabbit.Domain.Core", "MicroRabbit.Domain.Core\MicroRabbit.Domain.Core.csproj", "{2EDA1F93-6B7D-40D2-AAE5-F2CC9E32265E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroRabbit.Infra.Bus", "MicroRabbit.Infra.Bus\MicroRabbit.Infra.Bus.csproj", "{407E1D20-D83F-4056-A170-6096CEA0D1C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroRabbit.Infra.Bus", "MicroRabbit.Infra.Bus\MicroRabbit.Infra.Bus.csproj", "{407E1D20-D83F-4056-A170-6096CEA0D1C7}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Receiver", "Receiver", "{6A40A637-0FEE-45EA-A07A-F37DC9EFC5A7}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Transfer", "Transfer", "{6A40A637-0FEE-45EA-A07A-F37DC9EFC5A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroRabbit.MVC", "MicroRabbit.MVC\MicroRabbit.MVC.csproj", "{9169D6C1-BB44-4FA4-9265-3FD113480D54}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroRabbit.MVC", "MicroRabbit.MVC\MicroRabbit.MVC.csproj", "{9169D6C1-BB44-4FA4-9265-3FD113480D54}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
