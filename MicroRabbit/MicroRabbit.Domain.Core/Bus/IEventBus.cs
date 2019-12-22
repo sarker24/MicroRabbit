@@ -11,7 +11,7 @@ namespace MicroRabbit.Domain.Core.Bus
     {
         Task SendCommand<T>(T command) where T : Command;
 
-        void Publish<T>(T @enent) where T : Event;
+        void Publish<T>(T @event) where T : Event;
         void SubsCribe<T, TH>()
             where T : Event
             where TH : IEventHandler<T>;
