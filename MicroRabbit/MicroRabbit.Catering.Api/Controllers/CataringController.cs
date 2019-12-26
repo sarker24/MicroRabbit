@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MicroRabbit.Cataring.Application.Interfaces;
+using MicroRabbit.Cataring.Application.Models;
 using MicroRabbit.Cataring.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -31,6 +32,13 @@ namespace MicroRabbit.Catering.Api.Controllers
             return Ok(_orderService.GetOrders());
         }
 
-        
+        [HttpPost]
+        public IActionResult post([FromBody] OrderTransfer orderTransfer)
+        {
+            _orderService.Transfer(orderTransfer);
+            return Ok(orderTransfer);
+        }
+
+
     }
 }

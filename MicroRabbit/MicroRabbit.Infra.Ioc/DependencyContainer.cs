@@ -1,7 +1,10 @@
-﻿using MicroRabbit.Cataring.Application.Interfaces;
+﻿using MediatR;
+using MicroRabbit.Cataring.Application.Interfaces;
 using MicroRabbit.Cataring.Application.Services;
 using MicroRabbit.Cataring.Data.Context;
 using MicroRabbit.Cataring.Data.Repository;
+using MicroRabbit.Cataring.Domain.CommandHandlers;
+using MicroRabbit.Cataring.Domain.Commands;
 using MicroRabbit.Cataring.Domain.Interfaces;
 using MicroRabbit.Domain.Core.Bus;
 using MicroRabbit.Infra.Bus;
@@ -19,7 +22,9 @@ namespace MicroRabbit.Infra.Ioc
             // Domain bus 
             services.AddTransient<IEventBus, RabbitMQBus>();
 
+            //Domain cataring commands>
 
+            services.AddTransient<IRequestHandler<CreateTransferCommand, bool>, TransferCommandHandler>();
             // Application services
 
             services.AddTransient<IOrderService, OrderService>();
