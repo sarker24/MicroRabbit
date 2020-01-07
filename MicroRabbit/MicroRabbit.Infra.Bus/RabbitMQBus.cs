@@ -99,7 +99,7 @@ namespace MicroRabbit.Infra.Bus
             {
                 await processEvent(eventName, message).ConfigureAwait(false);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;
