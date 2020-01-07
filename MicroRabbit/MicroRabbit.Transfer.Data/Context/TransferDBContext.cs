@@ -13,6 +13,6 @@ namespace MicroRabbit.Transfer.Data.Context
 
         }
 
-        public DbSet<OrderTransfer> Orders { get; set; }
+        public DbSet<OrderTransfer> OrderTransfers { get; set; }
     }
 }
