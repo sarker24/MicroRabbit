@@ -8,6 +8,11 @@ using MicroRabbit.Cataring.Domain.Commands;
 using MicroRabbit.Cataring.Domain.Interfaces;
 using MicroRabbit.Domain.Core.Bus;
 using MicroRabbit.Infra.Bus;
+using MicroRabbit.Transfer.Application.Interfaces;
+using MicroRabbit.Transfer.Application.Services;
+using MicroRabbit.Transfer.Data.Context;
+using MicroRabbit.Transfer.Data.Repository;
+using MicroRabbit.Transfer.Domain.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -15,7 +20,7 @@ using System.Text;
 
 namespace MicroRabbit.Infra.Ioc
 {
-  public  class DependencyContainer
+    public class DependencyContainer
     {
         public static void RegisterServices(IServiceCollection services)
         {
@@ -25,15 +30,20 @@ namespace MicroRabbit.Infra.Ioc
             //Domain cataring commands>
 
             services.AddTransient<IRequestHandler<CreateTransferCommand, bool>, TransferCommandHandler>();
+
             // Application services
 
             services.AddTransient<IOrderService, OrderService>();
+            services.AddTransient<ITransferService, TransferService>();
 
 
             //Data
 
             services.AddTransient<IOrderRepository, OrderRepository>();
+            services.AddTransient<ITransferRepository, TransferRepository>();
             services.AddTransient<CataringDBContext>();
+            services.AddTransient<TransferDBContext>();
+
         }
-     }
+    }
 }
