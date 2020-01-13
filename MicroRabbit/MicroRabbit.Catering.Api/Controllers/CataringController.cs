@@ -33,7 +33,7 @@ namespace MicroRabbit.Catering.Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult post([FromBody] OrderTransfer orderTransfer)
+        public IActionResult Post([FromBody] OrderTransfer orderTransfer)
         {
             _orderService.Transfer(orderTransfer);
             return Ok(orderTransfer);

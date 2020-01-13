@@ -25,6 +25,9 @@ namespace MicroRabbit.Cataring.Domain.CommandHandlers
             _bus.Publish(new TransferCreatedEvent(request.FirstName, request.LastName, request.PhoneNumber, request.EventLocation, request.Address, request.TotalAmount));
 
             return Task.FromResult(true);
+            
         }
+        
     }
+   
 }

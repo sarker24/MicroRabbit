@@ -21,7 +21,7 @@ namespace MicroRabbit.MVC.Services
             var uri = "https://localhost:5001/api/Cataring";
             var transferContent = new StringContent(JsonConvert.SerializeObject(receiverDto),
                                      System.Text.Encoding.UTF8, "application/json");
-            var response = await _apiClient.PatchAsync(uri, transferContent);
+            var response = await _apiClient.PostAsync(uri, transferContent);
             response.EnsureSuccessStatusCode();
         }
     }

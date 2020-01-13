@@ -33,14 +33,19 @@ namespace MicroRabbit.Infra.Bus
 
         public void Publish<T>(T @event) where T : Event
         {
+            // create factory
             var factory = new ConnectionFactory() { HostName = "localhost" };
+            // open connection
             using (var connection = factory.CreateConnection())
+               // Open channel
             using (var channel = connection.CreateModel())
             {
                 var eventName = @event.GetType().Name;
+                // declere queue
                 channel.QueueDeclare(eventName, false, false, false, null);
                 var message = JsonConvert.SerializeObject(@event);
                 var body = Encoding.UTF8.GetBytes(message);
+                // publish message
                 channel.BasicPublish("", eventName, null, body);
             }
         }
@@ -86,18 +91,19 @@ namespace MicroRabbit.Infra.Bus
             channel.QueueDeclare(eventName, false, false, false, null);
             var consumer = new AsyncEventingBasicConsumer(channel);
 
-            consumer.Received += consumer_Received;
+            consumer.Received += Consumer_Received; 
             channel.BasicConsume(eventName, true, consumer);
         }
 
-        private async Task consumer_Received(object sender, BasicDeliverEventArgs e)
+        private async Task Consumer_Received(object sender, BasicDeliverEventArgs e)
         {
             var eventName = e.RoutingKey;
             var message = Encoding.UTF8.GetString(e.Body);
+            Console.WriteLine("Received message {0}", message);
 
             try
             {
-                await processEvent(eventName, message).ConfigureAwait(false);
+                await ProcessEvent(eventName, message).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -106,8 +112,10 @@ namespace MicroRabbit.Infra.Bus
             }
         }
 
-        private async Task processEvent(string eventName, string message)
+        private async Task ProcessEvent(string eventName, string message)
         {
+            if(_handler.ContainsKey(eventName))
+            { 
             var subscriptions = _handler[eventName];
 
             foreach (var subcription  in subscriptions)
@@ -122,7 +130,7 @@ namespace MicroRabbit.Infra.Bus
 
                 await (Task)concreteType.GetMethod("Handle").Invoke(handler, new object[] { @event });
 
-
+                }
             }
         }
     }

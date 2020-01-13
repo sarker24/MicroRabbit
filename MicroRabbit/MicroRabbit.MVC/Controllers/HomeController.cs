@@ -34,6 +34,7 @@ namespace MicroRabbit.MVC.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
         [HttpPost]
 
         public async Task<IActionResult> Receiver(ReceiverViewModel model)

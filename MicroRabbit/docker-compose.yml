@@ -1,0 +1,25 @@
+version: '3.4'
+
+services:
+  microrabbit.catering.api:
+    image: ${DOCKER_REGISTRY-}microrabbitcateringapi
+    build:
+      context: .
+      dockerfile: MicroRabbit.Catering.Api/Dockerfile
+      
+
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    container_name: "sample_qiita_swagger-ui"
+    ports:
+      - "8081:8080"
+    volumes:
+      - ./swagger-docs/swagger.json:/swagger.json
+    environment:
+      SWAGGER_JSON: /swagger.json
+  microrabbit.mvc:
+    image: ${DOCKER_REGISTRY-}microrabbitmvc
+    build:
+      context: .
+      dockerfile: MicroRabbit.MVC/Dockerfile
+

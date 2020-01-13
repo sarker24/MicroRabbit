@@ -66,12 +66,12 @@ namespace MicroRabbit.Catering.Api
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-
+               
                 c.SwaggerEndpoint("/swagger/V1/swagger.json", "Cataring Microservice V1");
 
                 //string swaggerJsonBasePath = string.IsNullOrWhiteSpace(c.RoutePrefix) ? "." : "..";
                 //c.SwaggerEndpoint($"{swaggerJsonBasePath}/swagger/v1/swagger.json", "My API");
-               // c.RoutePrefix = string.Empty;
+              // c.RoutePrefix = "swagger";
 
             });
                        
